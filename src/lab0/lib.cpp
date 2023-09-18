@@ -12,7 +12,6 @@ int kolvo(int k, string line, char vowel[]){
         for (int l = 0; l < 6; l++){
             if (line[i] == vowel[l]){
                 k++;
-                cout << k << " " << line[i] << endl;
             }
         }
         i++;
