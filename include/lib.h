@@ -1,3 +1,4 @@
 #pragma once
+#include <string>
 
-int A();
+int kolvo(int k, string line, char vowel[]);
