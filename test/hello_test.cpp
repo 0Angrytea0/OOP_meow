@@ -8,10 +8,10 @@ using namespace std;
 TEST(ExampleOfStandartUsageTest1, BasicAssertions) {
   // arrange 
   string first = "asda";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
   int k = 0; 
+
+  // act
   int result = kolvo(k, first, vowel);
   
   // assert
@@ -21,10 +21,10 @@ TEST(ExampleOfStandartUsageTest1, BasicAssertions) {
 TEST(ExampleOfStandartUsageTest2, BasicAssertions) {
   // arrange 
   string first = "aa e i o y u";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
-  int k = 0; 
+  int k = 0;
+
+  // act 
   int result = kolvo(k, first, vowel);
   
   // assert
@@ -34,10 +34,10 @@ TEST(ExampleOfStandartUsageTest2, BasicAssertions) {
 TEST(ExampleOfStandartUsageTest3, BasicAssertions) {
   // arrange 
   string first = "aeaeae ia is su s";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
   int k = 0; 
+
+  // act
   int result = kolvo(k, first, vowel);
   
   // assert
@@ -47,10 +47,10 @@ TEST(ExampleOfStandartUsageTest3, BasicAssertions) {
 TEST(ExampleOfStandartUsageTest4, BasicAssertions) {
   // arrange 
   string first = "a";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
   int k = 0; 
+
+  // act
   int result = kolvo(k, first, vowel);
   
   // assert
@@ -60,10 +60,10 @@ TEST(ExampleOfStandartUsageTest4, BasicAssertions) {
 TEST(ExampleOfStandartUsageTest5, BasicAssertions) {
   // arrange 
   string first = "a   asdf ef   efa";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
   int k = 0; 
+
+  // act
   int result = kolvo(k, first, vowel);
   
   // assert
@@ -73,10 +73,10 @@ TEST(ExampleOfStandartUsageTest5, BasicAssertions) {
 TEST(ExampleOfStandartUsageTest6, BasicAssertions) {
   // arrange 
   string first = " ";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
   int k = 0; 
+
+  // act
   int result = kolvo(k, first, vowel);
   
   // assert
@@ -86,10 +86,10 @@ TEST(ExampleOfStandartUsageTest6, BasicAssertions) {
 TEST(ExampleOfStandartUsageTest7, BasicAssertions) {
   // arrange 
   string first = " a ";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
   int k = 0; 
+
+  // act
   int result = kolvo(k, first, vowel);
   
   // assert
@@ -99,10 +99,10 @@ TEST(ExampleOfStandartUsageTest7, BasicAssertions) {
 TEST(ExampleOfStandartUsageTest8, BasicAssertions) {
   // arrange 
   string first = "       o";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
   int k = 0; 
+
+  // act
   int result = kolvo(k, first, vowel);
   
   // assert
@@ -112,10 +112,10 @@ TEST(ExampleOfStandartUsageTest8, BasicAssertions) {
 TEST(ExampleOfStandartUsageTest9, BasicAssertions) {
   // arrange 
   string first = "                  ";
-
-  // act
   char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
   int k = 0; 
+
+  // act 
   int result = kolvo(k, first, vowel);
   
   // assert
