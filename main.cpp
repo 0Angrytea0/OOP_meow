@@ -7,11 +7,11 @@ using namespace std;
 
 
 int main(){
-    char vowel[] = {'a', 'e', 'i', 'o', 'y', 'u'};
-    int k = 0; 
+    char vowels[] = {'a', 'e', 'i', 'o', 'y', 'u'};
+    int quantity = 0; 
     string line;
     cout << "Enter the expression ";
     getline(cin, line);
-    cout << kolvo(k, line, vowel) << endl;
+    cout << quantity_of_vowels(quantity, line, vowels) << endl;
     return 0;
 }
