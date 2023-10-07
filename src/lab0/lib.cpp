@@ -11,7 +11,7 @@ int quantity_of_vowels(int quantity, string line, char vowels[]){
     while (i < line.length()){
         for (int l = 0; l < 6; l++){
             if (line[i] == vowels[l]){
-                k++;
+                quantity++;
             }
         }
         i++;
