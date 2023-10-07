@@ -6,10 +6,12 @@ using namespace std;
 
 #include "lib.h"
 
-int quantity_of_vowels(int quantity, string line, char vowels[]){
+int quantity_of_vowels(string line){
     int i = 0;
+    string vowels = "aeouyi";
+    int quantity = 0; 
     while (i < line.length()){
-        for (int l = 0; l < 6; l++){
+        for (int l = 0; l < vowels.length(); l++){
             if (line[i] == vowels[l]){
                 quantity++;
             }
