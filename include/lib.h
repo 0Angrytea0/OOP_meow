@@ -3,8 +3,6 @@
 #include <string>
 #include <iostream>
 
-static int char_to_digit(const unsigned char c);
-static unsigned char digit_to_char(int dg);
 
 class Twelve
 {
