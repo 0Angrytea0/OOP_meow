@@ -1,6 +1,6 @@
 #include "lib.h"
 
-static int char_to_digit(const unsigned char c){
+int char_to_digit(const unsigned char c){
     if( 'B' >= c and c >= 'A'){
         return 10 + c - 'A';
     }
@@ -12,7 +12,7 @@ static int char_to_digit(const unsigned char c){
     }
 }
 
-static unsigned char digit_to_char(int dg){
+unsigned char digit_to_char(int dg){
     if( 0 <= dg and dg <= 9){
         return  dg + '0';
     }
