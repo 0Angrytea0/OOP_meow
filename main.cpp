@@ -1,17 +1,30 @@
+//6угольник 8угольник треугольник
+/*
+
+в каждой фигуре написать вычисление геометр. центра, площади
+переместить, задав направление (x,y) и на сколько
+Как сравнить? 
+*/
+
 #include <iostream>
 #include <string>
 
-#include "lib.h"
+#include "figures.h"
+#include "triangle.h"
 
 using namespace std;
 
 
 int main(){
-    char vowels[] = {'a', 'e', 'i', 'o', 'y', 'u'};
-    int quantity = 0; 
-    string line;
-    cout << "Enter the expression ";
-    getline(cin, line);
-    cout << quantity_of_vowels(quantity, line, vowels) << endl;
-    return 0;
+    Triangle t1, t2, t3;
+    std::cin >> t1 >> t2;
+    std::cout << t1 << std::endl;
+    std::cout << t1.square() << std::endl;
+    std::cout << t1.center() << std::endl;
+    t3 = t2;
+    std::cout << t3 << std::endl;
+    if (t1 == t2){
+        std::cout << "Yes" << std::endl;
+    }
+
 }
