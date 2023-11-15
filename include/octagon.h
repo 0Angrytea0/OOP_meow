@@ -49,4 +49,5 @@ inline std::istream& operator>>(std::istream& is, Octagon& f){
             }
         }
     }
+    return is;
 }

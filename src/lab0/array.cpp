@@ -23,6 +23,11 @@ void Array::resize(size_t new_size)
     _size = new_size;
 }
 
+size_t Array::size()
+{
+    return _size;
+}
+
 void Array::push(Figure* fig)
 {
     resize(_size + 1);

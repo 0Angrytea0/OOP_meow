@@ -62,7 +62,7 @@ Octagon& Octagon::operator=(Octagon&& other)
     return *this;
 }
 
-void sort(double length_oct[]){
+void sort_o(double length_oct[]){
     for (size_t i = 0; i < 8; ++i)
     {
         for (size_t j = 0; j < 8; ++j)
@@ -89,8 +89,8 @@ bool Octagon::operator==(const Octagon& other)
             length_oct2[i] = sqrt((pow((other.oct[i].m_x - other.oct[j].m_x),2) + pow((other.oct[i].m_y - other.oct[j].m_y),2)));
         }
     }
-    sort(length_oct1);
-    sort(length_oct2);
+    sort_o(length_oct1);
+    sort_o(length_oct2);
     int count = 0;
     for (size_t i = 0; i < 3; ++i)
     {

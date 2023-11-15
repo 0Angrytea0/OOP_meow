@@ -56,13 +56,14 @@ Triangle& Triangle::operator=(Triangle&& other){
     return *this;
 }
 
-void sort(double length_tr[]){
+void sort_tr(double length_tr[]){
+    double x;
     for (size_t i = 0; i < 3; ++i)
     {
         for (size_t j = 0; j < 3; ++j)
         {
             if (length_tr[i] > length_tr[j]) {
-                double x = length_tr[i]; 
+                x = length_tr[i]; 
                 length_tr[i] = length_tr[j];
                 length_tr[j] = x;
             }
@@ -83,8 +84,8 @@ bool Triangle::operator==(const Triangle& other)
             length_tr2[i] = sqrt((pow((other.trian[i].m_x - other.trian[j].m_x),2) + pow((other.trian[i].m_y - other.trian[j].m_y),2)));
         }
     }
-    sort(length_tr1);
-    sort(length_tr2);
+    sort_tr(length_tr1);
+    sort_tr(length_tr2);
     int count = 0;
     for (size_t i = 0; i < 3; ++i)
     {
