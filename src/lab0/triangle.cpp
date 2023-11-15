@@ -21,15 +21,16 @@ Triangle::Triangle(const Triangle& other)
 }
 
 double Triangle::square() const{
-    double x1 = trian[0].m_x, y1 = trian[0].m_y,
-        x2 = trian[1].m_x, y2 = trian[1].m_y,
-        x3 = trian[2].m_x, y3 = trian[2].m_y;
-    double square = abs((x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3));
-    return square;
+    double x1 = trian[0].m_x; double y1 = trian[0].m_y;
+    double x2 = trian[1].m_x; double y2 = trian[1].m_y;
+    double x3 = trian[2].m_x; double y3 = trian[2].m_y;
+    double area = abs(((x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)) / 2.0);
+    return area;
 }
 
 Point Triangle::center() const{
     double sr_x = 0, sr_y = 0;
+    std::cout << "Center:" << std::endl;
     for (size_t i = 0; i < 3; ++i){
         sr_x += trian[i].m_x;
         sr_y += trian[i].m_y;
@@ -78,19 +79,27 @@ bool Triangle::operator==(const Triangle& other)
     {
         for (size_t j = i + 1; j < 3; ++j)
         {
-            length_tr1[i] = sqrt((pow((trian[i].m_x - trian[j].m_x),2) + pow((trian[i].m_x - trian[j].m_x),2)));
-            length_tr2[i] = sqrt((pow((other.trian[i].m_x - other.trian[j].m_x),2) + pow((other.trian[i].m_x - other.trian[j].m_x),2)));
+            length_tr1[i] = sqrt((pow((trian[i].m_x - trian[j].m_x),2) + pow((trian[i].m_y - trian[j].m_y),2)));
+            length_tr2[i] = sqrt((pow((other.trian[i].m_x - other.trian[j].m_x),2) + pow((other.trian[i].m_y - other.trian[j].m_y),2)));
         }
     }
     sort(length_tr1);
     sort(length_tr2);
-    return length_tr1 == length_tr2;
+    int count = 0;
+    for (size_t i = 0; i < 3; ++i)
+    {
+        if (length_tr1[i] == length_tr2[i])
+        {
+            count++;
+        }
+    }
+    if (count == 3) return true;
+    return false;
 }
 
 Triangle::operator double() const{
     return square();
 }
-
 
 
 

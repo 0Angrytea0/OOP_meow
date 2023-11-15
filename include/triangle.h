@@ -34,7 +34,7 @@ inline std::ostream& operator<<(std::ostream& os, const Triangle& f){
 }
 
 inline std::istream& operator>>(std::istream& is, Triangle& f){
-    std::cout << "Please enter the coordinates of the vertices 1 of the triangle:" << std::endl;
+    std::cout << "Please enter the coordinates of the vertices of the triangle:" << std::endl;
     std::cout << "order [x,y], separated by spaces : " << std::endl;
     for (size_t i = 0; i < 3; ++i) {
         is >> f.trian[i];
@@ -44,6 +44,10 @@ inline std::istream& operator>>(std::istream& is, Triangle& f){
     }
     if(f.trian[0] == f.trian[1] || f.trian[0] == f.trian[2] || f.trian[1] == f.trian[2]){
         throw std::logic_error("Same coordinates for different points");
+    }
+    if (f.square() == 0)
+    {
+        throw std::logic_error("This is straight line");
     }
     return is;
 }

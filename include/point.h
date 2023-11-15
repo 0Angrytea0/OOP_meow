@@ -14,8 +14,6 @@ public:
 		m_x(x), m_y(y){
 	}
     Point(const Point& other);
-    
-    // Point(const Point& other) : m_x(other.m_x), m_y(other.m_y) {}
 	~Point() = default;
 
 public:
