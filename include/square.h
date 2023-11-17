@@ -25,11 +25,12 @@ public:
 
 
     Point sq[4];
+    size_t size{4};
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Square& f){
     os << "Square's coordinates:"<< std::endl;
-    for(size_t i = 0; i < 4; ++i){
+    for(size_t i = 0; i < f.size; ++i){
         os << f.sq[i] << std::endl;
     }
     return os;
@@ -38,15 +39,15 @@ inline std::ostream& operator<<(std::ostream& os, const Square& f){
 inline std::istream& operator>>(std::istream& is, Square& f){
     std::cout << "Please enter the coordinates of the vertices of the square" << std::endl;
     std::cout << "order [x,y], separated by spaces: " << std::endl;
-    for (size_t i = 0; i < 4; ++i) {
+    for (size_t i = 0; i < f.size; ++i) {
         is >> f.sq[i];
         if (is.fail()) {
             throw std::invalid_argument("Input must be a number");
         }
     }
-    for (size_t i = 0; i < 4; ++i)
+    for (size_t i = 0; i < f.size; ++i)
     {
-        for (size_t j = i + 1; j < 4; ++j)
+        for (size_t j = i + 1; j < f.size; ++j)
         {
             if (f.sq[i] == f.sq[j])
             {
