@@ -3,8 +3,8 @@
 
 Octagon::Octagon(Point& ver1, Point& ver2, Point& ver3, Point& ver4, Point& ver5, Point& ver6, Point& ver7, Point& ver8)
 {
-    Point ver[8] = {ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8};
-    for (size_t i = 0; i < 8; ++i)
+    Point ver[size] = {ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8};
+    for (size_t i = 0; i < size; ++i)
     {
         oct[i] = ver[i];
     }
@@ -12,16 +12,18 @@ Octagon::Octagon(Point& ver1, Point& ver2, Point& ver3, Point& ver4, Point& ver5
 
 Octagon::Octagon(const Octagon& other)
 {
-    for (size_t i = 0; i < 8; ++i)
+    size = other.size;
+    for (size_t i = 0; i < size; ++i)
     {
         oct[i] = other.oct[i];
     }
+    
 }
 
 Point Octagon::center() const
 {
     double sr_x = 0, sr_y = 0;
-    for (size_t i = 0; i < 8; ++i){
+    for (size_t i = 0; i < size; ++i){
         sr_x += oct[i].m_x;
         sr_y += oct[i].m_y;
     }
@@ -33,8 +35,8 @@ double Octagon::square() const
     double x1 = oct[0].m_x; double y1 = oct[0].m_y;
     Point center = this->center();
     double R = sqrt(pow((x1 - center.m_x),2) + pow((y1 - center.m_y),2));
-    double r = R * cos(M_PI / 8);
-    double area = 0.5 * 8 * R * r;
+    double r = R * cos(M_PI / size);
+    double area = 0.5 * size * R * r;
     return area;
 }
 
@@ -42,7 +44,7 @@ Octagon& Octagon::operator=(const Octagon& other)
 {
     if (this != &other)
     {
-        for (size_t i{0}; i < 8; ++i)
+        for (size_t i{0}; i < size; ++i)
         {
             oct[i] = other.oct[i];
         }
@@ -54,7 +56,7 @@ Octagon& Octagon::operator=(Octagon&& other)
 {
     if (this != &other)
     {
-        for (size_t i{0}; i < 8; ++i)
+        for (size_t i{0}; i < size; ++i)
         {
             oct[i] = std::move(other.oct[i]);
         }
@@ -63,9 +65,10 @@ Octagon& Octagon::operator=(Octagon&& other)
 }
 
 void sort_o(double length_oct[]){
-    for (size_t i = 0; i < 8; ++i)
+    size_t quantity_of_side = 8;
+    for (size_t i = 0; i < quantity_of_side; ++i)
     {
-        for (size_t j = 0; j < 8; ++j)
+        for (size_t j = 0; j < quantity_of_side; ++j)
         {
             if (length_oct[i] > length_oct[j]) {
                 double x = length_oct[i]; 
@@ -78,10 +81,10 @@ void sort_o(double length_oct[]){
 
 bool Octagon::operator==(const Octagon& other)
 {
-    int quantity_of_lines = 8;
+    size_t quantity_of_lines = 8;
     double length_oct1[quantity_of_lines]{};
     double length_oct2[quantity_of_lines]{};
-    for (size_t i = 0; i < 3; ++i)
+    for (size_t i = 0; i < quantity_of_lines; ++i)
     {
         for (size_t j = i + 1; j < quantity_of_lines; ++j)
         {
@@ -92,14 +95,14 @@ bool Octagon::operator==(const Octagon& other)
     sort_o(length_oct1);
     sort_o(length_oct2);
     int count = 0;
-    for (size_t i = 0; i < 3; ++i)
+    for (size_t i = 0; i < quantity_of_lines; ++i)
     {
         if (length_oct1[i] == length_oct2[i])
         {
             count++;
         }
     }
-    if (count == 3) return true;
+    if (count == quantity_of_lines) return true;
     return false;
 }
 
