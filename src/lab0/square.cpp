@@ -14,7 +14,8 @@ Square::Square(Point& ver1, Point& ver2, Point& ver3, Point& ver4)
 
 Square::Square(const Square& other)
 {
-    for (size_t i = 0; i < 4; ++i)
+    size = other.size;
+    for (size_t i = 0; i < size; ++i)
     {
         sq[i] = other.sq[i];
     }
@@ -32,7 +33,7 @@ Point Square::center() const
 {
     double sr_x = 0, sr_y = 0;
     std::cout << "Center:" << std::endl;
-    for (size_t i = 0; i < 4; ++i){
+    for (size_t i = 0; i < size; ++i){
         sr_x += sq[i].m_x;
         sr_y += sq[i].m_y;
     }
