@@ -23,11 +23,12 @@ public:
 
 
     Point trian[3];
+    size_t size{3};
 };
 
 inline std::ostream& operator<<(std::ostream& os, const Triangle& f){
     os << "Triangle's coordinates:"<< std::endl;
-    for(size_t i = 0; i < 3; ++i){
+    for(size_t i = 0; i < f.size; ++i){
         os << f.trian[i] << std::endl;
     }
     return os;
@@ -36,7 +37,7 @@ inline std::ostream& operator<<(std::ostream& os, const Triangle& f){
 inline std::istream& operator>>(std::istream& is, Triangle& f){
     std::cout << "Please enter the coordinates of the vertices of the triangle:" << std::endl;
     std::cout << "order [x,y], separated by spaces : " << std::endl;
-    for (size_t i = 0; i < 3; ++i) {
+    for (size_t i = 0; i < f.size; ++i) {
         is >> f.trian[i];
         if (is.fail()) {
             throw std::invalid_argument("Input must be a number");
