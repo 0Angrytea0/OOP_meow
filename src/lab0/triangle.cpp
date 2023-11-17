@@ -14,7 +14,8 @@ Triangle::Triangle(Point& ver1, Point& ver2, Point& ver3){
 
 Triangle::Triangle(const Triangle& other)
 {
-    for (size_t i = 0; i < 3; ++i)
+    size = other.size;
+    for (size_t i = 0; i < size; ++i)
     {
         trian[i] = other.trian[i];
     }
@@ -31,7 +32,7 @@ double Triangle::square() const{
 Point Triangle::center() const{
     double sr_x = 0, sr_y = 0;
     std::cout << "Center:" << std::endl;
-    for (size_t i = 0; i < 3; ++i){
+    for (size_t i = 0; i < size; ++i){
         sr_x += trian[i].m_x;
         sr_y += trian[i].m_y;
     }
@@ -58,9 +59,10 @@ Triangle& Triangle::operator=(Triangle&& other){
 
 void sort_tr(double length_tr[]){
     double x;
-    for (size_t i = 0; i < 3; ++i)
+    size_t quantity_of_lines = 3;
+    for (size_t i = 0; i < quantity_of_lines; ++i)
     {
-        for (size_t j = 0; j < 3; ++j)
+        for (size_t j = 0; j < quantity_of_lines; ++j)
         {
             if (length_tr[i] > length_tr[j]) {
                 x = length_tr[i]; 
@@ -76,9 +78,9 @@ bool Triangle::operator==(const Triangle& other)
     int quantity_of_lines = 3;
     double length_tr1[quantity_of_lines]{};
     double length_tr2[quantity_of_lines]{};
-    for (size_t i = 0; i < 3; ++i)
+    for (size_t i = 0; i < quantity_of_lines; ++i)
     {
-        for (size_t j = i + 1; j < 3; ++j)
+        for (size_t j = i + 1; j < quantity_of_lines; ++j)
         {
             length_tr1[i] = sqrt((pow((trian[i].m_x - trian[j].m_x),2) + pow((trian[i].m_y - trian[j].m_y),2)));
             length_tr2[i] = sqrt((pow((other.trian[i].m_x - other.trian[j].m_x),2) + pow((other.trian[i].m_y - other.trian[j].m_y),2)));
@@ -87,14 +89,14 @@ bool Triangle::operator==(const Triangle& other)
     sort_tr(length_tr1);
     sort_tr(length_tr2);
     int count = 0;
-    for (size_t i = 0; i < 3; ++i)
+    for (size_t i = 0; i < quantity_of_lines; ++i)
     {
         if (length_tr1[i] == length_tr2[i])
         {
             count++;
         }
     }
-    if (count == 3) return true;
+    if (count == quantity_of_lines) return true;
     return false;
 }
 
