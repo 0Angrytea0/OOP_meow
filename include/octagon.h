@@ -4,29 +4,33 @@
 #include <string>
 #include "figures.h"
 
-class Octagon: public Figure
+template <Number T>
+class Octagon: public Figure<T>
 {
-    friend std::ostream& operator<<(std::ostream& os, const Octagon& t);
-    friend std::istream& operator>>(std::istream& is, Octagon& t);
+    template <Number F>
+    friend std::ostream& operator<<(std::ostream& os, const Octagon<F>& t);
+    template <Number F>
+    friend std::istream& operator>>(std::istream& is, Octagon<F>& t);
 public:
-    Octagon(): oct{Point(), Point(), Point(), Point(), Point(), Point(), Point(), Point()}{};
-    Octagon(Point& ver1, Point& ver2, Point& ver3, Point& ver4, Point& ver5, Point& ver6, Point& ver7, Point& ver8);
-    Octagon(const Octagon &other);
+    Octagon(): oct{Point<T>(), Point<T>(), Point<T>(), Point<T>(), Point<T>(), Point<T>(), Point<T>(), Point<T>()}{};
+    Octagon(Point<T>& ver1, Point<T>& ver2, Point<T>& ver3, Point<T>& ver4, Point<T>& ver5, Point<T>& ver6, Point<T>& ver7, Point<T>& ver8);
+    Octagon(const Octagon<T> &other);
 
-    virtual double square() const override;
-    virtual Point center() const override;
-    Octagon& operator=(const Octagon& other);
-    Octagon& operator=(Octagon&& other);
-    bool operator==(const Octagon& other);
+    virtual T square() const override;
+    virtual Point<T> center() const override;
+    Octagon<T>& operator=(const Octagon<T>& other);
+    Octagon<T>& operator=(Octagon<T>&& other);
+    bool operator==(const Octagon<T>& other);
     virtual operator double() const;
 
     ~Octagon(){};
 
-    Point oct[8]{};
+    Point<T> oct[8]{};
     size_t size{8};
 };
 
-inline std::ostream& operator<<(std::ostream& os, const Octagon& f){
+template <Number T>
+inline std::ostream& operator<<(std::ostream& os, const Octagon<T>& f){
     os << "Octagon's coordinates:"<< std::endl;
     for(size_t i = 0; i < f.size; ++i){
         os << f.oct[i] << std::endl;
@@ -34,9 +38,10 @@ inline std::ostream& operator<<(std::ostream& os, const Octagon& f){
     return os;
 }
 
-inline std::istream& operator>>(std::istream& is, Octagon& f){
+template <Number T>
+inline std::istream& operator>>(std::istream& is, Octagon<T>& f){
     std::cout << "Please enter the coordinates of the vertices of the octagon:" << std::endl;
-    std::cout << "order [x,y], separated by spaces, the first vertex is the upper left, go clockwise order: " << std::endl;
+    std::cout << "order [x,y], separated by spaces" << std::endl;
     for (size_t i = 0; i < f.size; ++i) {
         is >> f.oct[i];
         if (is.fail()) {
@@ -46,7 +51,7 @@ inline std::istream& operator>>(std::istream& is, Octagon& f){
     for (int i = 0; i < f.size; i++) {
         for (int j = i + 1; j < f.size; j++) {
             if (f.oct[i] == f.oct[j]) {
-                throw std::logic_error("Same coordinates for different points");
+                throw std::logic_error("Same coordinates for different point<T>s");
             }
         }
     }

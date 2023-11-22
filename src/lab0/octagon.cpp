@@ -1,16 +1,18 @@
 #include "octagon.h"
 #include <math.h>
 
-Octagon::Octagon(Point& ver1, Point& ver2, Point& ver3, Point& ver4, Point& ver5, Point& ver6, Point& ver7, Point& ver8)
+template <Number T>
+Octagon<T>::Octagon(Point<T>& ver1, Point<T>& ver2, Point<T>& ver3, Point<T>& ver4, Point<T>& ver5, Point<T>& ver6, Point<T>& ver7, Point<T>& ver8)
 {
-    Point ver[size] = {ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8};
+    Point<T> ver[size] = {ver1, ver2, ver3, ver4, ver5, ver6, ver7, ver8};
     for (size_t i = 0; i < size; ++i)
     {
         oct[i] = ver[i];
     }
 }
 
-Octagon::Octagon(const Octagon& other)
+template <Number T>
+Octagon<T>::Octagon(const Octagon<T>& other)
 {
     size = other.size;
     for (size_t i = 0; i < size; ++i)
@@ -20,27 +22,30 @@ Octagon::Octagon(const Octagon& other)
     
 }
 
-Point Octagon::center() const
+template <Number T>
+Point<T> Octagon<T>::center() const
 {
-    double sr_x = 0, sr_y = 0;
+    T sr_x = 0, sr_y = 0;
     for (size_t i = 0; i < size; ++i){
-        sr_x += oct[i].m_x;
-        sr_y += oct[i].m_y;
+        sr_x += oct[i]._x;
+        sr_y += oct[i]._y;
     }
-    return Point(sr_x / 8.0, sr_y / 8.0);
+    return Point<T>(sr_x / 8.0, sr_y / 8.0);
 }
 
-double Octagon::square() const 
+template <Number T>
+T Octagon<T>::square() const 
 {
-    double x1 = oct[0].m_x; double y1 = oct[0].m_y;
-    Point center = this->center();
-    double R = sqrt(pow((x1 - center.m_x),2) + pow((y1 - center.m_y),2));
-    double r = R * cos(M_PI / size);
-    double area = 0.5 * size * R * r;
+    T x1 = oct[0]._x; T y1 = oct[0]._y;
+    Point<T> center = this->center();
+    T R = sqrt(pow((x1 - center._x),2) + pow((y1 - center._y),2));
+    T r = R * cos(M_PI / size);
+    T area = 0.5 * size * R * r;
     return area;
 }
 
-Octagon& Octagon::operator=(const Octagon& other)
+template <Number T>
+Octagon<T>& Octagon<T>::operator=(const Octagon<T>& other)
 {
     if (this != &other)
     {
@@ -52,7 +57,8 @@ Octagon& Octagon::operator=(const Octagon& other)
     return *this;
 }
 
-Octagon& Octagon::operator=(Octagon&& other)
+template <Number T>
+Octagon<T>& Octagon<T>::operator=(Octagon<T>&& other)
 {
     if (this != &other)
     {
@@ -64,14 +70,15 @@ Octagon& Octagon::operator=(Octagon&& other)
     return *this;
 }
 
-void sort_o(double length_oct[]){
+template <Number T>
+void sort_o(T length_oct[]){
     size_t quantity_of_side = 8;
     for (size_t i = 0; i < quantity_of_side; ++i)
     {
         for (size_t j = 0; j < quantity_of_side; ++j)
         {
             if (length_oct[i] > length_oct[j]) {
-                double x = length_oct[i]; 
+                T x = length_oct[i]; 
                 length_oct[i] = length_oct[j];
                 length_oct[j] = x;
             }
@@ -79,17 +86,18 @@ void sort_o(double length_oct[]){
     }
 }
 
-bool Octagon::operator==(const Octagon& other)
+template <Number T>
+bool Octagon<T>::operator==(const Octagon<T>& other)
 {
     size_t quantity_of_lines = 8;
-    double length_oct1[quantity_of_lines]{};
-    double length_oct2[quantity_of_lines]{};
+    T length_oct1[quantity_of_lines]{};
+    T length_oct2[quantity_of_lines]{};
     for (size_t i = 0; i < quantity_of_lines; ++i)
     {
         for (size_t j = i + 1; j < quantity_of_lines; ++j)
         {
-            length_oct1[i] = sqrt((pow((oct[i].m_x - oct[j].m_x),2) + pow((oct[i].m_y - oct[j].m_y),2)));
-            length_oct2[i] = sqrt((pow((other.oct[i].m_x - other.oct[j].m_x),2) + pow((other.oct[i].m_y - other.oct[j].m_y),2)));
+            length_oct1[i] = sqrt((pow((oct[i]._x - oct[j]._x),2) + pow((oct[i]._y - oct[j]._y),2)));
+            length_oct2[i] = sqrt((pow((other.oct[i]._x - other.oct[j]._x),2) + pow((other.oct[i]._y - other.oct[j]._y),2)));
         }
     }
     sort_o(length_oct1);
@@ -106,7 +114,8 @@ bool Octagon::operator==(const Octagon& other)
     return false;
 }
 
-Octagon::operator double() const
+template <Number T>
+Octagon<T>::operator double() const
 {
     return square();
 }
