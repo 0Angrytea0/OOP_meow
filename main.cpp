@@ -1,15 +1,25 @@
+#include "allocator.h"
+#include "container.h"
+
 #include <iostream>
-#include <string>
+#include <map>
 
-#include "lib.h"
+int factorial(int n) {
+    return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
+}
 
-using namespace std;
+int main() {
+    std::map<int, int, std::less<int>, Allocator<std::pair<const int, int>>> Map;
+    for (size_t i{0}; i < 10; ++i){
+        Map[i] = factorial(i);
+    }
+    for (const auto& pair : Map) {
+        std::cout << pair.first << " " << pair.second << std::endl;
+    }
 
-
-int main(){
-    string line;
-    cout << "Enter the expression ";
-    getline(cin, line);
-    cout << quantity_of_vowels(line) << endl;
-    return 0;
+    Container<int, 5> _Container;
+    for (int i{0}; i < 10; ++i){
+        _Container.push_back(i);
+    }
+    _Container.print();
 }

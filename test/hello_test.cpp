@@ -1,88 +1,68 @@
 #include <gtest/gtest.h>
-#include <string>
-#include "lib.h" 
-using namespace std;
+#include "container.h"
 
 
+TEST(Container_Test, push_back){
+    Container<int, 5> _Container;
 
-TEST(ExampleOfStandartUsageTest1, BasicAssertions) {
-  string first = "asda";
+    _Container.push_back(1);
+    _Container.push_back(2);
+    _Container.push_back(3);
 
-  int result = quantity_of_vowels(first);
-  
-  EXPECT_EQ(result, 2);
+    EXPECT_EQ(_Container.data[0], 1);
+    EXPECT_EQ(_Container.data[1], 2);
+    EXPECT_EQ(_Container.data[2], 3);
 }
 
-TEST(ExampleOfStandartUsageTest2, BasicAssertions) {
-  string second = "aa e i o y u";
+TEST(Container_Test, size1){
+    Container<int, 5> _Container;
 
-  int result = quantity_of_vowels(second);
+    _Container.push_back(1);
+    _Container.push_back(2);
+    _Container.push_back(3);
 
-  EXPECT_EQ(result, 7);
+    EXPECT_EQ(_Container.size, 3);
 }
 
-TEST(ExampleOfStandartUsageTest3, BasicAssertions) {
-  string third = "aeaeae ia is su s";
+TEST(Container_Test, size2){
+    Container<int, 1> _Container;
 
-  int result = quantity_of_vowels(third);
+    _Container.push_back(1);
+    _Container.push_back(2);
+    _Container.push_back(3);
 
-  EXPECT_EQ(result, 10);
+    EXPECT_EQ(_Container.size, 3);
 }
 
-TEST(ExampleOfStandartUsageTest4, BasicAssertions) {
-  // arrange 
-  string fouth = "a";
+TEST(Container_Test, capacity1){
+    Container<int, 5> _Container;
 
-  int result = quantity_of_vowels(fouth);
-  
-  EXPECT_EQ(result, 1);
+    _Container.push_back(1);
+    _Container.push_back(2);
+    _Container.push_back(3);
+
+    EXPECT_EQ(_Container.capacity, 5);
 }
 
-TEST(ExampleOfStandartUsageTest5, BasicAssertions) {
-  // arrange 
-  string fifth = "a   asdf ef   efa";
- 
-  int result = quantity_of_vowels(fifth);
-  
-  EXPECT_EQ(result, 5);
+TEST(Container_Test, capacity2){
+    Container<int, 1> _Container;
+
+    _Container.push_back(1);
+    _Container.push_back(2);
+    _Container.push_back(3);
+
+    EXPECT_EQ(_Container.capacity, 3);
 }
 
-TEST(ExampleOfStandartUsageTest6, BasicAssertions) {
-  string sixth = " ";
+TEST(Container_Test, print){
+    Container<int, 5> _Container;
+    _Container.push_back(1);
+    _Container.push_back(2);
+    _Container.push_back(3);
 
-  int result = quantity_of_vowels(sixth);
-  
-  EXPECT_EQ(result, 0);
-}
+    testing::internal::CaptureStdout();
+    _Container.print();
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "1 2 3 \n");
 
-TEST(ExampleOfStandartUsageTest7, BasicAssertions) {
-  string seventh = " a ";
-
-  int result = quantity_of_vowels(seventh);
-  
-  EXPECT_EQ(result, 1);
-}
-
-TEST(ExampleOfStandartUsageTest8, BasicAssertions) {
-  string eighth = "       o";
-
-  int result = quantity_of_vowels(eighth);
-  
-  EXPECT_EQ(result, 1);
-}
-
-TEST(ExampleOfStandartUsageTest9, BasicAssertions) {
-  string nineth = "                  ";
-
-  int result = quantity_of_vowels(nineth);
-  
-  EXPECT_EQ(result, 0);
-}
-
-TEST(ExampleOfStandartUsageTest10, BasicAssertions) {
-  string tenth = "1234";
-
-  int result = quantity_of_vowels(tenth);
-  
-  EXPECT_EQ(result, 0);
 }
