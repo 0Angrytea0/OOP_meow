@@ -56,7 +56,10 @@ public:
         return _size;
     }
     
-    ~Array() {};
+    ~Array() {
+        delete arr;
+        _size = 0;
+    }
 
 
     size_t _size;
