@@ -1,11 +1,17 @@
 #pragma once
 
 #include <iostream>
-#include <string>
 #include <memory>
-#include <cmath>
-#include <algorithm>
+#include <cstring>
+#include <string>
+#include <random>
+#include <fstream>
+#include <set>
+#include <math.h>
+#include <mutex>
+#include <shared_mutex>
 #include "point.h"
+
 
 class NPC;
 class Squirrel;
@@ -37,12 +43,15 @@ class NPC {
     friend std::ostream &operator<<(std::ostream &os, NPC &npc);
 
 public:
+    std::mutex mtx;
+    bool alive{true};
+
     Point<int> position;
     NpcType type;
     std::vector<std::shared_ptr<Observer>> observers;
 
     NPC() = default;
-    NPC(const Point<int>& position_, NpcType type_);
+    NPC(const Point<int>& position_, NpcType type_) : position(position_), type(type_) {}
 
     virtual void print() = 0;
     virtual void print(std::ostream &os) = 0;
@@ -53,6 +62,17 @@ public:
 
     void subscribe(std::shared_ptr<Observer> observer );
     void fight_notify(NPC& defender, bool win);
+
+    void move(int shift_x, int shift_y, int max_x, int max_y);
+
+    NpcType get_type();
+    Point<int> position_();
+
+    bool is_alive();
+    void must_die();
+
+    virtual int get_dkill() const = 0;
+    virtual int get_dmove() const = 0;
 };
 
 std::ostream &operator<<(std::ostream &os, NPC &npc);

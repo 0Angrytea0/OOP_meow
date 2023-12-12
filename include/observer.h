@@ -2,9 +2,11 @@
 
 #include <iostream>
 #include <fstream>
+#include <shared_mutex>
 #include <memory>
 #include "npc.h"
 
+std::mutex print_mutex_;
 
 class FileObserver : public Observer {
 private:

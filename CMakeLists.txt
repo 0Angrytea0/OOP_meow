@@ -23,7 +23,7 @@ add_library(my_lib ${SOURCES})
 
 add_executable(my_exe main.cpp)
 
-target_link_libraries(my_exe PRIVATE my_lib)
+target_link_libraries(my_exe PRIVATE my_lib pthread)
 
 add_executable(my_test ${TEST_SOURCES})
 
