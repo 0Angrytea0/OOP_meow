@@ -1,32 +1,32 @@
-#pragma once
+// #pragma once
 
-#include <iostream>
-#include <fstream>
-#include <shared_mutex>
-#include <memory>
-#include "npc.h"
+// #include <iostream>
+// #include <fstream>
+// #include <shared_mutex>
+// #include <memory>
+// #include "npc.h"
 
-std::mutex print_mutex_;
+// std::mutex print_mutex_;
 
-class FileObserver : public Observer {
-private:
-    std::string filename_;
-    std::ofstream file_;
+// class FileObserver : public Observer {
+// private:
+//     std::string filename_;
+//     std::ofstream file_;
 
-    FileObserver(std::string flname);
-    ~FileObserver();
+//     FileObserver(std::string flname);
+//     ~FileObserver();
     
-public:
-    static std::shared_ptr<Observer> get(std::string filename);
+// public:
+//     static std::shared_ptr<Observer> get(std::string filename);
     
-    void on_fight(NPC& attacker, NPC& defender, bool win) override; 
-};
+//     void on_fight(NPC& attacker, NPC& defender, bool win) override; 
+// };
 
-class ScreenObserver : public Observer {
-private:
-    ScreenObserver(){};
+// class ScreenObserver : public Observer {
+// private:
+//     ScreenObserver(){};
 
-public:
-    static std::shared_ptr<Observer> get();
-    void on_fight(NPC& attacker, NPC& defender, bool win) override;
-};
+// public:
+//     static std::shared_ptr<Observer> get();
+//     void on_fight(NPC& attacker, NPC& defender, bool win) override;
+// };

@@ -3,8 +3,9 @@
 #include "ork.h"
 #include "bear.h"
 #include "squirrel.h"
-#include "factory.h"
+//#include "factory.h"
 #include "visitor.h"
+#include <shared_mutex>
 
 #include <sstream>
 
@@ -19,6 +20,55 @@ using set_t = std::set<std::shared_ptr<NPC>>;
 
 using namespace std::chrono_literals;
 std::mutex print_mutex;
+
+class TextObserver : public Observer {
+private:
+    TextObserver(){};
+public:
+    static std::shared_ptr<Observer> get(){
+        static TextObserver instance;
+        return std::shared_ptr<Observer>(&instance, [](Observer *) {});
+    }
+    void on_fight(NPC& attacker, NPC& defender, bool win)
+    {
+        if (win)
+        {
+            std::lock_guard<std::mutex> lck(print_mutex);
+            std::cout << std::endl
+                    << "Murder --------" << std::endl;
+            std::cout << "Killer: ";
+            attacker.print();
+            std::cout << "Victim: ";
+            defender.print();
+        }
+    }
+};
+
+class NPCFactory{
+public:
+    static std::shared_ptr<NPC> factory(NpcType type, const Point<int>& position){
+        std::shared_ptr<NPC> result;
+        switch(type) {
+            case NpcType::BearType:
+                result = std::make_shared<Bear>(position);
+                break;
+            case NpcType::OrkType:
+                result = std::make_shared<Ork>(position);
+                break;
+            case NpcType::SquirrelType:
+                result = std::make_shared<Squirrel>(position);
+                break;
+            default:
+                throw std::invalid_argument("Invalid type");
+                break;
+        }
+        if(result){
+            result->subscribe(TextObserver::get());
+            // result->subscribe(FileObserver::get("log.txt"));
+        }
+        return result;
+    }
+};
 
 std::ostream &operator<<(std::ostream &os, const set_t &array)
 {

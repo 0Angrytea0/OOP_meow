@@ -1,56 +1,56 @@
-#include "observer.h"
+// #include "observer.h"
 
 
-FileObserver::FileObserver(std::string flname) {
-    this->filename_ = flname;
-    this->file_ = std::ofstream(flname);
-    if (!(file_.is_open())) {
-        std::cout << "Observer's file opening error!" << std::endl;
-    }
-}
+// FileObserver::FileObserver(std::string flname) {
+//     this->filename_ = flname;
+//     this->file_ = std::ofstream(flname);
+//     if (!(file_.is_open())) {
+//         std::cout << "Observer's file opening error!" << std::endl;
+//     }
+// }
 
-FileObserver::~FileObserver() {
-    this->file_.close();
-}
+// FileObserver::~FileObserver() {
+//     this->file_.close();
+// }
 
-std::shared_ptr<Observer> FileObserver::get(std::string filename) {
-    static FileObserver instance(filename);
-    return std::shared_ptr<Observer>(&instance, [](Observer *) {});
-}
+// std::shared_ptr<Observer> FileObserver::get(std::string filename) {
+//     static FileObserver instance(filename);
+//     return std::shared_ptr<Observer>(&instance, [](Observer *) {});
+// }
     
-void FileObserver::on_fight(NPC& attacker, NPC& defender, bool win){
-    std::lock_guard<std::mutex> lck(print_mutex_);
-    if (win){
-        if(file_.is_open()){
-            file_ << std::endl
-                << "Murder --------" << std::endl;
-            file_ << "Killer: ";
-            attacker.print(file_);
-            file_ << "Victim: ";
-            defender.print(file_);
-        }
-        else{
-            std::cerr << "Observer's file opening error!" << std::endl;
-        }
-    }
+// void FileObserver::on_fight(NPC& attacker, NPC& defender, bool win){
+//     std::lock_guard<std::mutex> lck(print_mutex_);
+//     if (win){
+//         if(file_.is_open()){
+//             file_ << std::endl
+//                 << "Murder --------" << std::endl;
+//             file_ << "Killer: ";
+//             attacker.print(file_);
+//             file_ << "Victim: ";
+//             defender.print(file_);
+//         }
+//         else{
+//             std::cerr << "Observer's file opening error!" << std::endl;
+//         }
+//     }
         
-}
+// }
 
 
 
-std::shared_ptr<Observer> ScreenObserver::get(){
-    static ScreenObserver instance;
-    return std::shared_ptr<Observer>(&instance, [](Observer *) {});
-}
+// std::shared_ptr<Observer> ScreenObserver::get(){
+//     static ScreenObserver instance;
+//     return std::shared_ptr<Observer>(&instance, [](Observer *) {});
+// }
 
-void ScreenObserver::on_fight(NPC& attacker, NPC& defender, bool win) {
-    std::lock_guard<std::mutex> lck(print_mutex_);
-    if (win){
-        std::cout << std::endl
-                << "Murder --------" << std::endl;
-        std::cout << "Killer: ";
-        attacker.print();
-        std::cout << "Victim: ";
-        defender.print();
-    }
-}
+// void ScreenObserver::on_fight(NPC& attacker, NPC& defender, bool win) {
+//     std::lock_guard<std::mutex> lck(print_mutex_);
+//     if (win){
+//         std::cout << std::endl
+//                 << "Murder --------" << std::endl;
+//         std::cout << "Killer: ";
+//         attacker.print();
+//         std::cout << "Victim: ";
+//         defender.print();
+//     }
+// }

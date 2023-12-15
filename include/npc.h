@@ -9,7 +9,6 @@
 #include <set>
 #include <math.h>
 #include <mutex>
-#include <shared_mutex>
 #include "point.h"
 
 
@@ -58,7 +57,7 @@ public:
     virtual void save(std::ostream &os);
 
     virtual bool accept(NPCVisitor& visitor, NPC& attacker) = 0;
-    virtual bool is_close(const std::shared_ptr<NPC> &other, size_t distance) const;
+    virtual bool is_close(const std::shared_ptr<NPC> &other, size_t distance);
 
     void subscribe(std::shared_ptr<Observer> observer );
     void fight_notify(NPC& defender, bool win);
